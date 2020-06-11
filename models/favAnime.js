@@ -11,12 +11,15 @@ let favAnimeSchema = new mongoose.Schema({
         required: true
     },
     genre: {
-        type: String,
+        type: Array,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    animeId: {
+        type: String 
     }
 })
 
