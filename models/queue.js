@@ -7,8 +7,10 @@ let queueSchema = new mongoose.Schema({
         required: true
     },
     queue: [{
-        watched: Array,
         watching: Array,
-        next: Array
+        watched: Array,
+        willWatch: Array
     }]
 })
+
+module.exports = mongoose.model('Queue', queueSchema)

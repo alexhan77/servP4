@@ -49,15 +49,23 @@ router.put('/', (req, res) => {
     })
 })
 
+
 router.put('/:id', (req, res) => {
-    db.favAnime.findOne({_id: req.body.favAnimeId })
+    db.favAnime.findOne({
+        user: req.body.user
+    })
     .then((favAnime) => {
-        let fav = favAnime.faves.id(req.params.id)
+        console.log('fave Data', favAnime.faves)
+        // for (let i = 0; i <= favAnime.faves.length; i++) {
+            
+        // }
+        let fav = favAnime.faves
         fav.title = req.body.title,
         fav.rating = req.body.rating,
         fav.genre = req.body.genre,
         fav.animeId = req.body.animeId
         fav.save()
+        
     })
     .then(() => {
         res.redirect('/favorites')
