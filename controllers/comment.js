@@ -2,8 +2,9 @@ let db = require('../models')
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    db.Comment.findAll()
+router.get('/:animeId', (req, res) => {
+    db.Comment.findOne({animeId: req.params.animeId
+    })
     .then((commentData) => {
         res.send(commentData)
     })
@@ -28,7 +29,7 @@ router.post('/', (req, res) => {
 //This route is to add a comment to an anime ( even tho its a PUT route)
 router.put('/', (req, res) => {
     db.Comment.findOne({
-        animeId: req.body.animeId,
+        animeId: req.body.animeId
     })
     .then((comment) => {
         comment.userComment.push({

@@ -59,6 +59,23 @@ router.post('/signup', (req, res) => {
   })
 })
 
+  router.get('/users', (req, res) => {
+   db.User.find({})
+    .then(users => {
+      res.send(users)
+    })
+    .catch(err => {
+      console.log('error', err)
+      
+    })
+    // The user is logged in, so req.user should have data!
+    // TODO:Add posts and user info
+    // NOTE: This is the user data from the time the token was issued
+    // WARNING: If you update the user info those changes will not be reflected here
+    // To avoid this, reissue a token when you update user data
+
+  })
+
 // NOTE: User should be logged in to access this route
 
 
