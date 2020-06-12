@@ -13,9 +13,10 @@ router.get('/', (req, res) => {
     })
 })
 
+//Creates the instance(list) for the fav anime(objects) to be hoisted onto
 router.post('/', (req, res) => {
     db.favAnime.create({
-        user: req.user
+        user: req.body.user
     })
     .then(() => {
         res.send({message: 'favAnime list is created, add some!', status: '200'})
@@ -25,22 +26,22 @@ router.post('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
-    db.favAnime.findOneAndUpdate({
-        user: req.user._id,
-        _id: req.body._id
-    },
-        { $push: {item: {
+//creates the anime 
+router.put('/', (req, res) => {
+    db.favAnime.findOne({
+        //user: req.user._id
+        user: req.body.user
+    })
+        // _id: req.body._id
+    .then((favAnime) => {
+        favAnime.faves.push({
             title: req.body.title,
             rating: req.body.rating,
             genre: req.body.genre,
             animeId: req.body.animeId  
-        }
-    },
-        new: true
         })
-    .then(() => {
-        res.redirect('/favorites')
+        favAnime.save()
+        res.send(favAnime)
         console.log('Your Faves were created successfully')
     })
     .catch(err => {
