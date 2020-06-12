@@ -23,6 +23,11 @@ let userSchema = new mongoose.Schema({
 	admin: {
 		type: Boolean,
 		default: false
+	}, 
+	bio: String,
+	username: {
+		type: String,
+		required: true
 	}
 })
 
