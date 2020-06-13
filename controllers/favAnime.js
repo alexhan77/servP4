@@ -1,5 +1,6 @@
 let db = require('../models')
 const express = require('express');
+const { populate } = require('../models/user');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -52,29 +53,58 @@ router.put('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     db.favAnime.findOne({
-        user: req.body.user
+        user: req.body.user,
+        //animeId: req.body.animeId
     })
     .then((favAnime) => {
         console.log('fave Data', favAnime.faves)
-        // for (let i = 0; i <= favAnime.faves.length; i++) {
-            
-        // }
-        let fav = favAnime.faves
-        fav.title = req.body.title,
-        fav.rating = req.body.rating,
-        fav.genre = req.body.genre,
-        fav.animeId = req.body.animeId
-        fav.save()
-        
+        db.favAnime.updateOne({
+            user: req.body.user
+        })
+        for (let i = 0; i < favAnime.faves.length; i++) {
+            if (favAnime.faves[i].animeId === req.params.id) {
+                let fav = favAnime.faves[i]
+                fav.title = req.body.title,
+                fav.rating = req.body.rating,
+                fav.genre = req.body.genre,
+                fav.animeId = req.body.animeId
+            }
+        }
+        favAnime.save()
     })
-    .then(() => {
+    .then((anime) => {
+        res.send(anime)
         res.redirect('/favorites')
-        console.log('Edit for your top faves successful', favorites)
+        console.log('Edit for your top faves successful', favAnime)
     })
 })
 
-router.delete('/:id', (req, res) => {
-    db.favAnime.findByIdAndDelete(req.params.id)
+// router.put('/:id', (req, res) => {
+//     db.favAnime.updateOne({
+//         user: req.body.user
+//     },{
+//         user.faves[req.params.id].animeId: 
+//     })
+//     .then((anime) => {
+//         res.send(anime)
+//         //res.redirect('/favorites')
+//         //console.log('Edit for your top faves successful', favAnime)
+//     })
+// })
+
+router.put('/delete/:id', (req, res) => {
+    db.favAnime.findOne({
+        user: req.body.user
+    })
+    .then((favAnime) => {
+        console.log('fave Data', favAnime.fave)
+        for (let i = 0; i < favAnime.faves.length; i++) {
+            if (favAnime.faves[i].animeId === req.params.id) {
+                favAnime.faves.pop(i)
+            }
+        }
+        favAnime.save()
+    })
     .then(() => {
         res.send({ message: 'Successfully deleted a Faves', status: '200' })
     })
