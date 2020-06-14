@@ -7,9 +7,18 @@ let queueSchema = new mongoose.Schema({
         required: true
     },
     queue: [{
-        watching: Array,
-        watched: Array,
-        willWatch: Array
+        watching: [{
+            animeId: String,
+            title: String 
+        }],
+        watched: [{
+            animeId: String,
+            title: String
+        }],
+        willWatch: [{
+            animeId: String,
+            title: String 
+        }]
     }]
 })
 
