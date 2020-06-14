@@ -3,10 +3,12 @@ const express = require('express');
 const { populate } = require('../models/user');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    db.favAnime.findAll()
+router.get('/:user', (req, res) => {
+    db.favAnime.findOne({
+        user: req.params.user
+    })
     .then((favorite) => {
-        res.render('/favorites')
+        res.send(favorite)
         console.log('Found all of your favorites babe😘', favorite)
     })
     .catch(err => {
