@@ -6,19 +6,24 @@ let queueSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
-    queue: [{
-        watching: [{
-            animeId: String,
-            title: String 
-        }],
-        watched: [{
-            animeId: String,
-            title: String
-        }],
-        willWatch: [{
-            animeId: String,
-            title: String 
-        }]
+    // queue: [{
+    //     watching: [{
+    //         animeId: String,
+    //         title: String 
+    //     }],
+    //     watched: [{
+    //         animeId: String,
+    //         title: String
+    //     }],
+    //     willWatch: [{
+    //         animeId: String,
+    //         title: String 
+    //     }]
+    // }],
+    animeQ: [{
+        animeId: String,
+        title: String,
+        status: String
     }]
 })
 
