@@ -23,6 +23,7 @@ app.use('/profile', expressJwt({ secret: process.env.JWT_SECRET }), require('./c
 app.use('/comment', require('./controllers/comment'))
 app.use('/favorites', require('./controllers/favAnime'))
 app.use('/queue', require('./controllers/queue'))
+app.use('/playlist', require('./controllers/playlist'))
 
 app.get('*', (req, res) => {
   res.status(404).send({ message: 'Not Found' })
