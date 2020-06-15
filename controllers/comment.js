@@ -61,9 +61,9 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     db.Comment.findByIdAndDelete({_id: req.params.id}, {
-        user: req.body.user,
-        body: req.body.body,
-        animeId: req.body.animeId
+         user: req.body.user,
+         body: req.body.body,
+         animeId: req.body.animeId
     })
     .then(() => {
         res.redirect('/:id')
