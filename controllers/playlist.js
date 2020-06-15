@@ -19,10 +19,10 @@ router.get('/:user', (req, res) => {
 
 router.post('/', (req, res) => {
     db.create({
-        user: req.body.user,
-        animeId: req.body.animeId,
-        title: req.body.title,
-        status: req.body.status
+        user: req.body.user
+        // animeId: req.body.animeId,
+        // title: req.body.title,
+        // status: req.body.status
     })
     .then(() => {
         res.send({message: 'Instance is created', status: '200'})
