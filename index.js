@@ -22,7 +22,7 @@ app.use('/auth', require('./controllers/auth'))
 app.use('/profile', expressJwt({ secret: process.env.JWT_SECRET }), require('./controllers/profile'))
 app.use('/comment', require('./controllers/comment'))
 app.use('/favorites', require('./controllers/favAnime'))
-app.use('/queue', require('./controllers/queue'))
+// app.use('/queue', require('./controllers/queue'))
 app.use('/playlist', require('./controllers/playlist'))
 
 app.get('*', (req, res) => {
