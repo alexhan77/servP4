@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 //TODO Still needs a button //////// create put route for edditing profile
 router.put('/:id', (req, res) => {
-   
+   db.User.update()
 })
 
 //TODO Still needs a button /////// delete route for profile
